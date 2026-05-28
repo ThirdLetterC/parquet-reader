@@ -1,6 +1,6 @@
-# parquet-arrow-ffi
+# parquet-reader
 
-A small Rust shared/static library that exposes Apache Parquet read/write operations to C through the Arrow C Data / C Stream ABI.
+A small Rust shared/static library that exposes Apache Parquet read/write operations to C.
 
 This crate is useful when you want Rust's `parquet` and `arrow` implementation behind a C-compatible API, without exposing Rust types across the ABI boundary.
 
