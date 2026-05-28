@@ -12,40 +12,6 @@ This crate is useful when you want Rust's `parquet` and `arrow` implementation b
 - Get a debug-formatted Arrow schema string for a Parquet file.
 - Retrieve thread-local error messages from failed FFI calls.
 
-The API is intentionally columnar. It does **not** expose custom row structs. Use the Arrow C Data / C Stream structures to consume or produce batches.
-
-## Repository layout
-
-```text
-.
-├── Cargo.toml
-├── lib.rs
-├── parquet_arrow_ffi.h
-└── README.md
-```
-
-`Cargo.toml` currently points the library target at the root-level `lib.rs`:
-
-```toml
-[lib]
-name = "parquet_arrow_ffi"
-path = "lib.rs"
-crate-type = ["cdylib", "staticlib"]
-```
-
-You can move `lib.rs` to `src/lib.rs` later if you prefer the standard Cargo layout; update `Cargo.toml` accordingly.
-
-## Requirements
-
-- Rust toolchain with Cargo.
-- A C compiler for your platform.
-- A C-side Arrow C Data consumer/producer, such as:
-  - nanoarrow,
-  - Apache Arrow C++,
-  - your own implementation of `ArrowArray`, `ArrowSchema`, and `ArrowArrayStream`.
-
-The included header contains minimal Arrow C Data / C Stream declarations. If your project already includes Arrow's official C ABI header, define `PARQUET_ARROW_FFI_SKIP_ARROW_ABI` before including `parquet_arrow_ffi.h`.
-
 ## Build
 
 ```bash
@@ -376,11 +342,3 @@ Build release libraries:
 ```bash
 cargo build --release
 ```
-
-## Suggested next improvements
-
-- Add integration tests that read a known Parquet file from C.
-- Add a nanoarrow-based C example that creates an `ArrowArrayStream` and writes it to Parquet.
-- Generate the C header with `cbindgen` if the Rust API grows.
-- Add CI for Linux, macOS, and Windows release builds.
-- Add a license file before publishing the repository.
