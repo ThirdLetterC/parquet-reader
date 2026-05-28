@@ -1,0 +1,12 @@
+[package]
+name = "parquet_arrow_ffi"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "parquet_arrow_ffi"
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+arrow = { version = "58.3.0", features = ["ffi"] }
+parquet = { version = "58.3.0", features = ["arrow"] }
